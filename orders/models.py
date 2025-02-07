@@ -13,6 +13,7 @@ from django.db import models
 from django.urls import reverse
 
 from dish.models import Dish
+from table.models import Table
 
 
 class Order(models.Model):
@@ -35,3 +36,24 @@ class Order(models.Model):
     time = models.TimeField(auto_now_add=True, verbose_name='Время заказа')
     total_price = models.DecimalField(max_digits=10, decimal_places=2,
                                       verbose_name='Сумма заказа')
+    table = models.ForeignKey(Table,
+                              on_delete=models.PROTECT,
+                              related_name='table',
+                              verbose_name='Столы')
+    dish = models.ManyToManyField(to=Dish)
+    status = models.CharField(max_length=7,
+                              choices=STATUS_CHOICES,
+                              default='pending',
+                              verbose_name='Статус заказа')
+
+    class Meta:
+        verbose_name = "Заказ"
+        verbose_name_plural = "Заказы"
+
+    def __str__(self):
+        return f"Заказ #{self.id}. Статус: {self.status}"
+
+    def get_absolute_url(self):
+        return reverse("orders:order_detail", kwargs={
+            "order_pk": self.pk
+        })

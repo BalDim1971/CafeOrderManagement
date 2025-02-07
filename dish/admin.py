@@ -20,5 +20,5 @@ class DishAdmin(admin.ModelAdmin):
     ordering = ('name', 'price')
     
     @admin.display(description='Краткое описание')
-    def description_info(self, dish: Dish):
+    def description_info(self, dish: Dish) -> str:
         return f'Описание {len(dish.description)} символов'

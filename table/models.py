@@ -3,6 +3,7 @@
 """
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
+from django.urls import reverse
 
 
 class Table(models.Model):
@@ -30,3 +31,13 @@ class Table(models.Model):
     class Meta:
         verbose_name = 'Стол'
         verbose_name_plural = 'Столы'
+
+    def get_absolute_url(self) -> str:
+        return reverse(
+            'table_detail',
+            kwargs={'table_slug': self.slug}
+        )
+
+    def __str__(self) -> str:
+        return (f"Cтол номер: {self.number} на {self.count} персон\n"
+                f"Описание стола: {self.description}")
