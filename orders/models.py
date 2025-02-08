@@ -11,6 +11,7 @@
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 
 from dish.models import Dish
 from table.models import Table
@@ -32,8 +33,12 @@ class Order(models.Model):
         ('paid', 'Оплачено'),
     ]
 
-    date = models.DateField(auto_now_add=True, verbose_name='Дата заказа')
-    time = models.TimeField(auto_now_add=True, verbose_name='Время заказа')
+    date = models.DateTimeField(auto_now_add=True,
+                                verbose_name='Дата заказа',
+                                default=timezone.now)
+    time = models.TimeField(auto_now_add=True,
+                            verbose_name='Время заказа',
+                            default=timezone.now)
     total_price = models.DecimalField(max_digits=10, decimal_places=2,
                                       verbose_name='Сумма заказа')
     table = models.ForeignKey(Table,
@@ -49,9 +54,17 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
+        ordering = ['-date', '-time']
+        indexes = [
+            models.Index(fields=['-date', '-time']),
+        ]
 
     def __str__(self):
-        return f"Заказ #{self.id}. Статус: {self.status}"
+        return (f"Заказ #{self.id}. "
+                f"Срок выполнения - {self.date} {self.time}."
+                f"Сумма: {self.total_price}."
+                f"Стол: {self.table.name}."
+                f"Статус: {self.status}.")
 
     def get_absolute_url(self):
         return reverse("orders:order_detail", kwargs={

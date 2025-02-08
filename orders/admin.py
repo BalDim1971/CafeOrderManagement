@@ -8,14 +8,10 @@ from .models import Order
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'slug', 'description', 'image',)
-    list_filter = ('name',)
-    list_display_links = ('id', 'name')
-    search_fields = ('name', 'description',)
-    prepopulated_fields = {'slug': ('name',)}
-    filter_vertical = ('name',)
-    ordering = ('name',)
-    
-    @admin.display(description='Краткое описание')
-    def description_info(self, category: Category) -> str:
-        return f'Описание {len(category.description)} символов'
+    list_display = ('id', 'date', 'time', 'total_price', 'table', 'status',)
+    list_filter = ('date', 'time',)
+    list_display_links = ('id', 'date', 'time',)
+    search_fields = ('date', 'time', 'total_price', 'table', 'status',)
+    prepopulated_fields = {'slug': ('date', 'time',)}
+    filter_vertical = ('date', 'time',)
+    ordering = ('date', 'time',)
