@@ -8,9 +8,9 @@ from .models import Category
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'slug', 'description', 'image',)
+    list_display = ('name', 'slug', 'description', 'image',)
     list_filter = ('name',)
-    list_display_links = ('id', 'name')
+    list_display_links = ('name',)
     search_fields = ('name', 'description',)
     prepopulated_fields = {'slug': ('name',)}
     ordering = ('name',)
