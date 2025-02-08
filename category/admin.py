@@ -5,6 +5,7 @@
 from django.contrib import admin
 from .models import Category
 
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug', 'description', 'image',)
@@ -12,7 +13,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
     search_fields = ('name', 'description',)
     prepopulated_fields = {'slug': ('name',)}
-    filter_vertical = ('name',)
     ordering = ('name',)
     
     @admin.display(description='Краткое описание')

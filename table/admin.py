@@ -13,7 +13,6 @@ class TableAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'number')
     search_fields = ('number', 'description',)
     prepopulated_fields = {'slug': ('number',)}
-    filter_vertical = ('number',)
     ordering = ('number',)
     
     @admin.display(description='Краткое описание')

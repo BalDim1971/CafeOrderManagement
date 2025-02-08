@@ -12,6 +12,5 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('date', 'time',)
     list_display_links = ('id', 'date', 'time',)
     search_fields = ('date', 'time', 'total_price', 'table', 'status',)
-    prepopulated_fields = {'slug': ('date', 'time',)}
-    filter_vertical = ('date', 'time',)
+    prepopulated_fields = {'slug': ('date', 'time')}
     ordering = ('date', 'time',)

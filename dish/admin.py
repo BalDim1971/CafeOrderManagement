@@ -12,11 +12,10 @@ class DishAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'slug', 'description', 'image', 'category',
                     'price',)
     list_filter = ('category', 'name', 'price',)
-    list_display_links = ('id', 'name', 'price')
+    list_display_links = ('id', 'name')
     list_editable = ('price',)
     search_fields = ('name', 'description',)
     prepopulated_fields = {'slug': ('name',)}
-    filter_vertical = ('category__name',)
     ordering = ('name', 'price')
     
     @admin.display(description='Краткое описание')

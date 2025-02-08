@@ -33,11 +33,15 @@ class Order(models.Model):
         ('paid', 'Оплачено'),
     ]
 
-    date = models.DateTimeField(auto_now_add=True,
-                                verbose_name='Дата заказа',
+    slug = models.SlugField(max_length=255, db_index=True, unique=True,
+                            validators=[
+                                MinLengthValidator(5),
+                                MaxLengthValidator(100),
+                            ],
+                            verbose_name='Slug')
+    date = models.DateTimeField(verbose_name='Дата заказа',
                                 default=timezone.now)
-    time = models.TimeField(auto_now_add=True,
-                            verbose_name='Время заказа',
+    time = models.TimeField(verbose_name='Время заказа',
                             default=timezone.now)
     total_price = models.DecimalField(max_digits=10, decimal_places=2,
                                       verbose_name='Сумма заказа')
