@@ -18,8 +18,8 @@ class Table(models.Model):
     number = models.IntegerField(verbose_name='Номер стола', unique=True)
     slug = models.SlugField(max_length=255, db_index=True, unique=True,
                             validators=[
-                                MinLengthValidator(5),
-                                MaxLengthValidator(100),
+                                MinLengthValidator(1),
+                                MaxLengthValidator(10),
                             ],
                             verbose_name='Slug')
     description = models.TextField(blank=True, verbose_name='Описание стола')

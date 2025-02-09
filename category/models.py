@@ -6,6 +6,7 @@ Category - Категория блюд: название, описание, из
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.urls import reverse
+from pytils.translit import slugify
 
 
 class Category(models.Model):
@@ -42,3 +43,8 @@ class Category(models.Model):
     def __str__(self) -> str:
         return (f"Наименование категории: {self.name}\n"
                 f"Описание категории: {self.description}")
+    
+    def save(self, *args, **kwargs) -> None:
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)

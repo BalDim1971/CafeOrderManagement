@@ -1,0 +1,8 @@
+{% extends 'orders/base.html' %}
+
+{% block content %}
+<a class="btn btn-primary btn-lg mb-5" href="{% url 'category:category_create' %}" role="button">
+    Добавить категорию блюд
+</a>
+{% include 'category/include/inc_category_card.html' %}
+{% endblock %}
