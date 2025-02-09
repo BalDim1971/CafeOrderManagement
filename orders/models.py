@@ -45,11 +45,11 @@ class Order(models.Model):
                             default=timezone.now)
     total_price = models.DecimalField(max_digits=10, decimal_places=2,
                                       verbose_name='Сумма заказа')
-    table = models.ForeignKey(Table,
-                              on_delete=models.PROTECT,
-                              related_name='table',
-                              verbose_name='Столы')
-    dish = models.ManyToManyField(to=Dish)
+    table_number = models.ForeignKey(Table,
+                                     on_delete=models.PROTECT,
+                                     related_name='table',
+                                     verbose_name='Столы')
+    items = models.ManyToManyField(to=Dish)
     status = models.CharField(max_length=7,
                               choices=STATUS_CHOICES,
                               default='pending',
@@ -67,7 +67,7 @@ class Order(models.Model):
         return (f"Заказ #{self.id}. "
                 f"Срок выполнения - {self.date} {self.time}."
                 f"Сумма: {self.total_price}."
-                f"Стол: {self.table.name}."
+                f"Стол: {self.table_number.name}."
                 f"Статус: {self.status}.")
 
     def get_absolute_url(self):

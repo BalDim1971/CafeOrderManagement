@@ -25,11 +25,7 @@ urlpatterns = [
     path('category/', include('category.urls', namespace='category')),
     path('dish/', include('dish.urls', namespace='dish')),
     path('table/', include('table.urls', namespace='table')),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'Панель администрирования'
 admin.site.site_title = 'Управление заказами кафе'

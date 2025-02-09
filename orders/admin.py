@@ -8,9 +8,9 @@ from .models import Order
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'date', 'time', 'total_price', 'table', 'status',)
+    list_display = ('id', 'date', 'time', 'total_price', 'table_number', 'status',)
     list_filter = ('date', 'time',)
     list_display_links = ('id', 'date', 'time',)
-    search_fields = ('date', 'time', 'total_price', 'table', 'status',)
+    search_fields = ('date', 'time', 'total_price', 'table_number', 'status',)
     prepopulated_fields = {'slug': ('date', 'time')}
     ordering = ('date', 'time',)
