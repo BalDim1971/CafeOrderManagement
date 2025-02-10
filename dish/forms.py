@@ -9,7 +9,7 @@ from dish.models import Dish
 
 class DishForm(forms.ModelForm):
     """
-    Форма для создания и редактирования столов
+    Форма для создания и редактирования блюд
     """
 
     def __init__(self, *args, **kwargs):
