@@ -14,7 +14,7 @@ from dish.models import Dish
 class DishListView(ListView):
     print('DishListView')
     model = Dish
-    template_name = 'Dish/Dish_list.html'
+    template_name = 'dish/dish_list.html'
     extra_context = {
         'title': 'Список блюд',
         'object_list': Dish.objects.all()
@@ -33,22 +33,22 @@ class DishListView(ListView):
 class DishCreateView(CreateView):
     model = Dish
     form_class = DishForm
-    success_url = reverse_lazy('Dish:list')
+    success_url = reverse_lazy('dish:list')
     extra_context = {
         'title': 'Создать блюдо',
     }
 
     def form_valid(self, form):
         if form.is_valid():
-            new_Dish = form.save()
-            new_Dish.slug = slugify(new_Dish.name)
-            new_Dish.save()
+            new_dish = form.save()
+            new_dish.slug = slugify(new_dish.name)
+            new_dish.save()
         return super().form_valid(form)
 
 
 class DishDetailView(DetailView):
     model = Dish
-    template_name = 'Dish/Dish_info.html'
+    template_name = 'dish/dish_info.html'
     extra_context = {
         'title': 'Подробно о блюде',
     }
@@ -57,7 +57,7 @@ class DishDetailView(DetailView):
 class DishUpdateView(UpdateView):
     model = Dish
     form_class = DishForm
-    success_url = reverse_lazy('Dish:list')
+    success_url = reverse_lazy('dish:list')
     extra_context = {
         'title': 'Обновить данные о блюде',
     }
@@ -71,7 +71,7 @@ class DishUpdateView(UpdateView):
 
 class DishDeleteView(DeleteView):
     model = Dish
-    success_url = reverse_lazy('Dish:list')
+    success_url = reverse_lazy('dish:list')
     extra_context = {
         'title': 'Удалить блюдо',
     }
