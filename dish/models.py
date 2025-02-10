@@ -7,6 +7,7 @@ Dish - Блюдо: имя, цена за единицу, возможно опи
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.urls import reverse
+from pytils.translit import slugify
 
 from category.models import Category
 
@@ -60,3 +61,8 @@ class Dish(models.Model):
             'dish',
             kwargs={'dish_slug': self.slug}
         )
+
+    def save(self, *args, **kwargs) -> None:
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)

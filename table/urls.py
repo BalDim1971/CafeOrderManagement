@@ -1,9 +1,10 @@
 from django.urls import path
 
+from .apps import TableConfig
 from .views import (TableListView, TableDetailView, TableCreateView,
                     TableUpdateView, TableDeleteView)
 
-app_name = 'table'
+app_name = TableConfig.name
 
 urlpatterns = [
     path('', TableListView.as_view(), name='list'),

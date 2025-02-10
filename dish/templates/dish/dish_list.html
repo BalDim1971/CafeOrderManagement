@@ -1,0 +1,8 @@
+{% extends 'orders/base.html' %}
+
+{% block content %}
+<a class="btn btn-primary btn-lg mb-5" href="{% url 'dish:dish_create' %}" role="button">
+    Добавить блюдо
+</a>
+{% include 'dish/include/inc_dish_card.html' %}
+{% endblock %}
