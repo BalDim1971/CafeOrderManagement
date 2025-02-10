@@ -4,6 +4,7 @@
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.urls import reverse
+from pytils.translit import slugify
 
 
 class Table(models.Model):
@@ -41,3 +42,8 @@ class Table(models.Model):
     def __str__(self) -> str:
         return (f"Cтол номер: {self.number} на {self.count} персон\n"
                 f"Описание стола: {self.description}")
+    
+    def save(self, *args, **kwargs) -> None:
+        if not self.slug:
+            self.slug = slugify(self.number)
+        return super().save(*args, **kwargs)

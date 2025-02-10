@@ -1,0 +1,8 @@
+{% extends 'orders/base.html' %}
+
+{% block content %}
+<a class="btn btn-primary btn-lg mb-5" href="{% url 'table:table_create' %}" role="button">
+    Добавить стол
+</a>
+{% include 'table/include/inc_table_card.html' %}
+{% endblock %}
