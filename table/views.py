@@ -11,7 +11,6 @@ from table.models import Table
 
 
 class TableListView(ListView):
-    print('TableListView')
     model = Table
     template_name = 'table/table_list.html'
     extra_context = {

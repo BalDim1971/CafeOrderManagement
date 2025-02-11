@@ -33,6 +33,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+        ordering = ('name',)
 
     def get_absolute_url(self) -> str:
         return reverse(
@@ -41,8 +42,7 @@ class Category(models.Model):
         )
 
     def __str__(self) -> str:
-        return (f"Наименование категории: {self.name}\n"
-                f"Описание категории: {self.description}")
+        return f'{self.name} ({self.description})'
     
     def save(self, *args, **kwargs) -> None:
         if not self.slug:

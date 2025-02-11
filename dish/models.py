@@ -31,15 +31,15 @@ class Dish(models.Model):
                                 MaxLengthValidator(100),
                             ],
                             verbose_name='Slug')
-    price = models.DecimalField(max_digits=8,
+    price = models.DecimalField(max_digits=9,
                                 decimal_places=2,
-                                verbose_name="Цена за единицу")
+                                verbose_name="Цена за одно блюдо")
     description = models.TextField(verbose_name="Описание блюда")
     image = models.ImageField(upload_to='images/', default=None,
                               null=True, blank=True,
                               verbose_name="Изображение блюда")
     category = models.ForeignKey(Category,
-                                 on_delete=models.PROTECT,
+                                 on_delete=models.CASCADE,
                                  related_name='dishes',
                                  verbose_name="Категории блюд")
     is_available = models.BooleanField(default=True)
@@ -50,11 +50,11 @@ class Dish(models.Model):
         ordering = ('name',)
     
     def __str__(self) -> str:
-        return (f"Название блюда: {self.name}\n"
-                f"Цена за единицу: {self.price}\n"
-                f"Описание блюда: {self.description}\n"
-                f"Категория блюда: {self.category}\n"
-                f"Доступность блюда: {self.is_available}")
+        """
+        Строковое отображение блюда
+        :return:
+        """
+        return (f'{self.name} {self.price}')
     
     def get_absolute_url(self) -> str:
         return reverse(

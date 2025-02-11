@@ -1,0 +1,8 @@
+{% extends 'orders/base.html' %}
+
+{% block content %}
+<a class="btn btn-primary btn-lg mb-5" href="{% url 'orders:order_create' %}" role="button">
+    Добавить заказ
+</a>
+{% include 'orders/include/inc_order_card.html' %}
+{% endblock %}

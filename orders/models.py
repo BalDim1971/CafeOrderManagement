@@ -12,6 +12,7 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from pytils.translit import slugify
 
 from dish.models import Dish
 from table.models import Table
@@ -49,7 +50,7 @@ class Order(models.Model):
                                      on_delete=models.PROTECT,
                                      related_name='table',
                                      verbose_name='Столы')
-    items = models.ManyToManyField(to=Dish)
+    items = models.ManyToManyField(to=Dish, verbose_name='Список блюд')
     status = models.CharField(max_length=7,
                               choices=STATUS_CHOICES,
                               default='pending',
@@ -74,3 +75,8 @@ class Order(models.Model):
         return reverse("orders:order_detail", kwargs={
             "order_pk": self.pk
         })
+
+    def save(self, *args, **kwargs) -> None:
+        if not self.slug:
+            self.slug = slugify(str(self.date) + ' ' + str(self.time))
+        return super().save(*args, **kwargs)

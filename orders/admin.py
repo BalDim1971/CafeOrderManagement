@@ -14,3 +14,7 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ('date', 'time', 'total_price', 'table_number', 'status',)
     prepopulated_fields = {'slug': ('date', 'time')}
     ordering = ('date', 'time',)
+    
+    @admin.display(description='Краткое описание')
+    def description_info(self, order: Order) -> str:
+        return f'Заказ {order.date} {order.time} на {order.total_price}'

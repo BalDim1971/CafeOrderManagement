@@ -12,7 +12,6 @@ from dish.models import Dish
 
 
 class DishListView(ListView):
-    print('DishListView')
     model = Dish
     template_name = 'dish/dish_list.html'
     extra_context = {

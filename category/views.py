@@ -11,7 +11,6 @@ from category.models import Category
 
 
 class CategoryListView(ListView):
-    print('CategoryListView')
     model = Category
     template_name = 'category/category_list.html'
     extra_context = {
