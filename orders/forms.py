@@ -24,7 +24,7 @@ class OrderForm(forms.ModelForm):
             'date': forms.DateInput(attrs={'class': 'form-control'}),
             'time': forms.TimeInput(attrs={'class': 'form-control'}),
             'table_number': forms.Select(attrs={'class': 'form-control'}),
-            'items': forms.SelectMultiple(attrs={'required': True, 'class': 'form-control'}),
+            'items': forms.SelectMultiple(attrs={'required': False, 'class': 'form-control'}),
             'status': forms.Select(attrs={'class': 'form-control'}),
         }
         # items = forms.ModelMultipleChoiceField(

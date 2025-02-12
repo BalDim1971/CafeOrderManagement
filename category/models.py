@@ -37,8 +37,8 @@ class Category(models.Model):
 
     def get_absolute_url(self) -> str:
         return reverse(
-            'category',
-            kwargs={'cat_slug': self.slug}
+            'category:category_info',
+            args=[self.id]
         )
 
     def __str__(self) -> str:

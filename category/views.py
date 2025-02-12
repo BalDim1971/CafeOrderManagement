@@ -4,6 +4,7 @@
 
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+
 from pytils.translit import slugify
 
 from category.forms import CategoryForm
@@ -11,12 +12,17 @@ from category.models import Category
 
 
 class CategoryListView(ListView):
+    """
+    Список категорий
+    """
     model = Category
     template_name = 'category/category_list.html'
-    extra_context = {
-        'title': 'Список категорий товаров',
-        'object_list': Category.objects.all()
-    }
+    context_object_name = 'object_list'
+    paginate_by = 3
+    # extra_context = {
+    #     'title': 'Список категорий товаров',
+    #     'object_list': Category.objects.all()
+    # }
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

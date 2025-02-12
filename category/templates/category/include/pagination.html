@@ -1,0 +1,15 @@
+<div class="pagination">
+  {% if page_obj.has_previous %}
+      <a class="pagination_link" href="?page=1">&laquo; первая</a>
+      <a class="pagination_link" href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+  {% endif %}
+
+  <span class="pagination_link example1-pagination_link__active">
+      Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+  </span>
+
+  {% if page_obj.has_next %}
+     <a class="pagination_link" href="?page={{ page_obj.next_page_number }}">следующая</a>
+     <a class="pagination_link" href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+  {% endif %}
+</div>
